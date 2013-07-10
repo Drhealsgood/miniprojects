@@ -4,7 +4,7 @@ Created on 10/07/2013
 @author: luke
 '''
 import unittest
-from string_editting import *
+from string_editing import *
 
 class StringEditingTests(unittest.TestCase):
     """
@@ -41,5 +41,24 @@ class StringEditingTests(unittest.TestCase):
             self.assertTrue(self.myString.is_palindrome(phrase))
         self.assertFalse(self.myString.is_palindrome("not_a_palindrome"))
         
+    def test_count_words_string(self): 
+        """
+        Counts the number of individual words in a string. 
+        It is possible to read these strings in from a text file
+        and generate a report
+        count_words will take any of three inputs: 
+        None will return 0
+        string="some_string"     will return the length of the string
+        file="some_file"         will return the length of th string in the file
         
-        
+        """
+        string      = "This is a string of some length that I will work out by using a function"
+        words       = string.split()
+        word_count  = len(words)
+        self.assertEqual(self.myString.count_words(string=string), word_count) # check string word count
+        file        = "test_resources/test_file.txt" 
+        with open(file) as f:
+            string  = f.read()
+            words   = string.split()
+            word_count = len(words)
+            self.assertEqual(self.myString.count_words(file=file), word_count) # check file string word count
