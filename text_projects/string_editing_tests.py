@@ -66,7 +66,7 @@ class StringEditingTests(unittest.TestCase):
         words       = string.split()
         word_count  = len(words)
         self.assertEqual(self.myString.count_words(string=string), word_count) # check string word count
-        file        = "test_resources/test_file.txt" 
+        file        = "test_resources/testing_file.txt" 
         with open(file) as f:
             string  = f.read()
             words   = string.split()
