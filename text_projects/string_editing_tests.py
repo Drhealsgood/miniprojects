@@ -19,10 +19,20 @@ class StringEditingTests(unittest.TestCase):
         Reverse a string takes a string as an input
         and returns the string reversed
         """
-        orig        = "Hello World!"
-        expected    = "".join(reversed(orig)) # Must remember reversed() returns a reversed object - iterable
-        output      = self.myString.reverse(orig)
-        self.assertEquals(output, expected, "{0} expected, but got {1}".format(expected, output))
+        tests       = ["Hello World!", (1,2,3,4), [9,8,7,6,5,4,3,2,1]]
+        for i in tests:
+            orig        = i
+            obj_reversed= reversed(orig)
+            # I shouldn't have done this maybe. Or I should be able to do it neater - use map
+            # or perhaps I check via sequence
+            if isinstance(i, str):
+                expected    = "".join(obj_reversed) 
+            if isinstance(i, list):
+                expected    = list(obj_reversed)
+            if isinstance(i, tuple):
+                expected    = tuple(obj_reversed)
+            output      = self.myString.reverse(orig)
+            self.assertEquals(output, expected, "{0} expected, but got {1}".format(expected, output))
         
     def test_count_vowels(self):
         """
