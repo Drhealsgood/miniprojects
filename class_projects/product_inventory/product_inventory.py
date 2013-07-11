@@ -58,14 +58,23 @@ class Inventory(Entity):
     
     @property
     def product_count(self):
+        """
+        @return: int: amt of product on hand
+        """
         return len(self._products)
 
     @property
     def products(self):
+        """
+        @return: list(Product): product on hand
+        """
         return self._products
         
     @property
     def id_number(self):
+        """
+        @return:  int: identity number of product
+        """
         return self._id
     
     def __repr__(self):

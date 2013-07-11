@@ -40,6 +40,25 @@ class TestInventory(unittest.TestCase):
         count   = self.inv.product_count
         self.assertEqual(count,5,"Expected 5 for product count, got {0}".format(count))
         
+    def testCountDifferentProduct(self):
+        """
+        Counts how many unique products there are
+        """
+        product = (apple,orange,banana) = Product(name="apple"), Product(name="orange"), Product(name="banana")
+        self.inv.product_add(apple)
+        get_count   = lambda inv: inv.product_diff_amount
+        self.assertEqual(get_count(self.inv), 1, "inventory contains {0} but had differing count of {1}".format(self.inv.products, get_count()))  
+        self.inv.product_add(apple, orange)
+        self.assertEqual(get_count(self.inv), 2, "inventory contains {0} but had differing count of {1}".format(self.inv.products, get_count()))
+    
+    def testProductValue(self):
+        """
+        Inventory needs to be able to sum the value of product on hand
+        """
+        product = (apple,orange,banana) = Product(name="apple", value=5), Product(name="orange",value=10), Product(name="banana",value=8)
+        self.inv.product_add(product)
+        self.assertEqual(sum([prod.value for prod in product]), self.inv.product_value)
+        
     def testID(self):
         """
             It's expected each inventory will have a unique identifier
@@ -87,15 +106,20 @@ class TestProductFactory(unittest.TestCase):
         """
             get_object os ex[ected to return a new product
             get_object will return the amount of objects that is passed in as an arg
-            each object will be uniquely defined
         """
         products    = list(self.product_factory.get_object(2))
         cls         = product_inventory.Product
         for prod in products:
             # check if in correct class and is not equal
             self.assertIsInstance(prod, cls, "{0} is not instance of {1}".format(prod, cls))
-        self.assertNotEqual(products[0], products[1], "Each product should be unique")
+
+class TestProduct(unittest.TestCase):    
+    #product class which has a price, id, and quantity on hand
     
+    def testInit(self):
+        """
+        A Product should have an id, a name (which product it is)
+        """
         
 
 class TestProductInventory(unittest.TestCase):
