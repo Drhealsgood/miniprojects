@@ -132,3 +132,24 @@ class ProductFactory(ObjFactory):
     def get_object(self, amt=1):
         for i in range(amt):
             yield Product()
+            
+if __name__ == "__main__":
+    """
+    Product Inventory Project – Create an application which manages an inventory of products. 
+    Create a product class which has a price, id, and quantity on hand. 
+    Then create an inventory class which keeps track of various products and can sum up the inventory value.
+    """
+    # create an inventory
+    inventory   = Inventory()
+    # add some products to the inventory
+    genProd = lambda name, value: Product(name=name,value=value)
+    for i in range(10):
+        inventory.product_add(genProd(name=str(i),value=i))
+    for i in range(5):
+        inventory.product_add(genProd(name=str(i),value=i))
+    # Get amount of product on hand, value of product, and amt of differnet product
+    prod_amt    = inventory.product_count
+    prod_val    = inventory.product_value
+    prod_diff   = inventory.product_diff_amount
+    for name, info in (("amount of product",prod_amt), ("value of product",prod_val), ("different products",prod_diff)):
+        print({"{0}: {1}".format(name,info)})
