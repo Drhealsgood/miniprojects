@@ -18,33 +18,66 @@ class Product(Entity):
     id      = 0
 
 
-    def __init__(self):
+    def __init__(self, name=None):
         '''
         Constructor
         '''
         self._id    = Product.id
         Product.id  = Product.id + 1
+        if not name:
+            self._name = "{0}_{1}".format(self.__class__, self._id)
     
     @property
     def id_number(self):
         return self._id
     
+    @property
+    def name(self):
+        return self._name
+    
+    def __repr__(self):
+        return "{0}: {1}".format(self.__class__, self._id)
+    
 class Inventory(Entity):
+    
     id      = 0
     
     def __init__(self):
         self._id        = Inventory.id
         Inventory.id    = Inventory.id + 1
+        self._products  = []
+        
+    def product_add(self, *args):
+        for arg in args:
+            if isinstance(arg, tuple) or isinstance(arg,list):
+                for prod in args:
+                    self._products.append(prod)
+            else:
+                self._products.append(prod)
+    
+    @property
+    def product_count(self):
+        return len(self._products)
+
+    @property
+    def products(self):
+        return self._products
         
     @property
     def id_number(self):
         return self._id
+    
+    def __repr__(self):
+        return "{0}: {1}".format(self.__class__, self._id)
     
 class ObjFactory(metaclass=ABCMeta):
     
     @abstractmethod
     def get_object(self):
         return 0
+    
+    def __repr__(self):
+        return "{0}: {1}".format(self.__class__, self._id)
     
 class InventoryFactory(ObjFactory):
     

@@ -32,9 +32,9 @@ class TestInventory(unittest.TestCase):
             add_product can take multiple products as an argument and will add them all.
             add_product can take lists of products, or any sequence, as arguments and add them all
         """
-        product = (apple, orange,banana) = Product(name="apple"), Product(name="orange"), Product(name="banana")
+        product = (apple,orange,banana) = Product(name="apple"), Product(name="orange"), Product(name="banana")
         self.inv.product_add(product)
-        count   = self.inv.product_count()
+        count   = self.inv.product_count
         self.assertEqual(count,3,"Expected 3 for product count, got {0}".format(count))
         self.inv.product_add(apple, orange)
         count   = self.inv.product_count()
@@ -48,7 +48,7 @@ class TestInventory(unittest.TestCase):
         curr    = inv()
         for i in range(5):
             next = inv()
-            self.assertEqual(curr.id+1, next.id, "ID change not as expected")
+            self.assertEqual(curr.id_number+1, next.id_number, "ID change not as expected")
             curr = next
         
         
