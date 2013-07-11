@@ -47,11 +47,11 @@ class TestInventory(unittest.TestCase):
         product = (apple,orange,banana) = Product(name="apple"), Product(name="orange"), Product(name="banana")
         self.inv.product_add(apple)
         get_count   = lambda inv: inv.product_diff_amount
-        self.assertEqual(get_count(self.inv), 1, "inventory contains {0} but had differing count of {1}".format(self.inv.products, get_count()))  
+        self.assertEqual(get_count(self.inv), 1, "inventory contains {0} but had differing count of {1}".format(self.inv.products, get_count(self.inv)))  
         self.inv.product_add(apple, orange)
-        self.assertEqual(get_count(self.inv), 2, "inventory contains {0} but had differing count of {1}".format(self.inv.products, get_count()))
+        self.assertEqual(get_count(self.inv), 2, "inventory contains {0} but had differing count of {1}".format(self.inv.products, get_count(self.inv)))
         self.inv.product_add(product)
-        self.assertEqual(get_count(self.inv), 3, "inventory contains {0} but had differing count of {1}".format(self.inv.products, get_count()))
+        self.assertEqual(get_count(self.inv), 3, "inventory contains {0} but had differing count of {1}".format(self.inv.products, get_count(self.inv)))
     
     def testProductValue(self):
         """

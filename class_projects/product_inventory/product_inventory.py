@@ -86,6 +86,13 @@ class Inventory(Entity):
         """
         @return: int: amt of product on hand
         """
+        return len([p for product in self._products for p in self._products[product]])
+    
+    @property
+    def product_diff_amount(self):
+        """
+        @return: int: the amount of different products on hand
+        """
         return len(self._products)
 
     @property
