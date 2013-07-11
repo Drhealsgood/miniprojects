@@ -18,7 +18,7 @@ class Product(Entity):
     id      = 0
 
 
-    def __init__(self, name=None):
+    def __init__(self, name=None, value=0):
         '''
         Constructor
         '''
@@ -26,6 +26,9 @@ class Product(Entity):
         Product.id  = Product.id + 1
         if not name:
             self._name = "{0}_{1}".format(self.__class__, self._id)
+        else:
+            self._name = name
+        self._value = value
     
     @property
     def id_number(self):
@@ -34,6 +37,14 @@ class Product(Entity):
     @property
     def name(self):
         return self._name
+    
+    @property
+    def value(self):
+        return self._value
+    
+    @value.setter
+    def value(self, val):
+        self._value = val
     
     def __repr__(self):
         return "{0}: {1}".format(self.__class__, self._id)
@@ -45,16 +56,30 @@ class Inventory(Entity):
     def __init__(self):
         self._id        = Inventory.id
         Inventory.id    = Inventory.id + 1
-        self._products  = []
+        self._products  = {}
         
     def product_add(self, *args):
+        
+        def add_to_products(prod):
+            try:
+                self._products[prod.name].append(prod)
+            except:
+                self._products[prod.name] = [prod]
+                
         for arg in args:
             if isinstance(arg, tuple) or isinstance(arg,list):
                 for prod in arg:
-                    self._products.append(prod)
+                    add_to_products(prod)
             elif isinstance(arg,Product):
-                self._products.append(arg)
+                add_to_products(arg)
             # if it's not a product it won't get added
+    
+    @property
+    def product_value(self):
+        """
+        @return: int: total value of product on hand
+        """
+        return sum([single.value for product in self._products for single in self._products[product]])
     
     @property
     def product_count(self):
