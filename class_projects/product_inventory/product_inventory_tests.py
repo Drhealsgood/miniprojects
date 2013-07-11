@@ -37,7 +37,7 @@ class TestInventory(unittest.TestCase):
         count   = self.inv.product_count
         self.assertEqual(count,3,"Expected 3 for product count, got {0}".format(count))
         self.inv.product_add(apple, orange)
-        count   = self.inv.product_count()
+        count   = self.inv.product_count
         self.assertEqual(count,5,"Expected 5 for product count, got {0}".format(count))
         
     def testID(self):

@@ -50,10 +50,11 @@ class Inventory(Entity):
     def product_add(self, *args):
         for arg in args:
             if isinstance(arg, tuple) or isinstance(arg,list):
-                for prod in args:
+                for prod in arg:
                     self._products.append(prod)
-            else:
-                self._products.append(prod)
+            elif isinstance(arg,Product):
+                self._products.append(arg)
+            # if it's not a product it won't get added
     
     @property
     def product_count(self):
