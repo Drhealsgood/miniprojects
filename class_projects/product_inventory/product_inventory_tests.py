@@ -68,8 +68,8 @@ class TestInventoryFactory(unittest.TestCase):
             get_object is expected to return a new inventory
             get_object will return the amount of objects that is passed in as an arg
         """
-        invs                = (inventory, second_inv) = self.inv_factory.get_object(2)
-        cls                 = product_inventory.Inventory
+        invs           = (inventory, second_inv) = list(self.inv_factory.get_object(2))
+        cls            = product_inventory.Inventory
         # an inv factory should produces unique inventories
         for inv in invs:
             self.assertIsInstance(inv, cls, "{0} is not instance of {1}".format(inv, cls))
@@ -89,8 +89,8 @@ class TestProductFactory(unittest.TestCase):
             get_object will return the amount of objects that is passed in as an arg
             each object will be uniquely defined
         """
-        products    = self.product_factory.get_object(2)
-        cls         = self.product_factory.Product
+        products    = list(self.product_factory.get_object(2))
+        cls         = product_inventory.Product
         for prod in products:
             # check if in correct class and is not equal
             self.assertIsInstance(prod, cls, "{0} is not instance of {1}".format(prod, cls))
