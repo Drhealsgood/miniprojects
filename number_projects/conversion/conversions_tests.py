@@ -12,8 +12,6 @@ import urllib.request
 class TestConverter(unittest.TestCase):
     converter   = conversions.Converter()
 
-
-
     def testBinaryToDecimal(self):
         binToDec    = lambda value: self.converter.binToDec(value) 
         tests       = {'1010':10,'0010':2,'00011010':26}
@@ -40,8 +38,6 @@ class TestConverter(unittest.TestCase):
         self.assertEquals(farToKel,310.928)
         self.assertEquals(kelToCel,26.85)
         self.assertEquals(kelToFar,80.33)
-        
-        
         
     def testCurrencyExchange(self):
         curr_exchange   = lambda c_one, c_two, amount: self.converter.currencyExchange(c_one,c_two,amount)
