@@ -44,8 +44,8 @@ class TestConverter(unittest.TestCase):
         curr_exchange   = lambda c_one, c_two, amount: self.converter.currencyExchange(c_one,c_two,amount)
         exg_amt         = curr_exchange('USD','NZD',50)
         curr_page       = urllib.request.urlopen('http://openexchangerates.org/api/latest.json?app_id=9f0710764c064370932f4f2496968c62')
-        print(json.loads(curr_page.read().decode(encoding='UTF-8')))
-        curr_details    = json.loads(curr_page.read().decode(encoding='UTF-8'))
+        obj             = curr_page.read().decode(encoding='UTF-8')
+        curr_details    = json.loads(obj)
         usd,nzd         = curr_details['USD'], curr_details['NZD']
         convert_amt     = nzd/usd
         result          = convert_amt*50
