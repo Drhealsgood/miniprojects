@@ -32,6 +32,7 @@ class TestConverter(unittest.TestCase):
         farToKel    = conversion('farenheit', 'kelvin',100)
         kelToCel    = conversion('kelvin','celsius',300)
         kelToFar    = conversion('kelvin','farenheit',300)
+        # if an incorrect type is passed it should raise a type error
         self.assertRaises(TypeError, conversion('asg','another',300))
         self.assertEquals(celToFar,86)
         self.assertEquals(celToKel, 303.15)
@@ -46,7 +47,7 @@ class TestConverter(unittest.TestCase):
         curr_page       = urllib.request.urlopen('http://openexchangerates.org/api/latest.json?app_id=9f0710764c064370932f4f2496968c62')
         obj             = curr_page.read().decode(encoding='UTF-8')
         curr_details    = json.loads(obj)
-        usd,nzd         = curr_details['USD'], curr_details['NZD']
+        usd,nzd         = curr_details['rates']['USD'], curr_details['rates']['NZD']
         convert_amt     = nzd/usd
         result          = convert_amt*50
         self.assertEqual(exg_amt, result) 
