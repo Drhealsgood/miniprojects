@@ -51,13 +51,40 @@ def intSolve(n, maxNum=4000000):
             first = second
             second = third
     return sum(__generateNums(n, maxNum))
+
+#http://projecteuler.net/problem=5
+def smallest_multiple(div_by):
+    """
+    2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+    
+    What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+    """
+    even        = lambda x, y: x % y == 0
+    solved      = False
+    value       = 232792560
+    
+    def check():
+        for i in range(2,div_by+1):
+            res     = even(value, i)
+            if res != True:
+                return 0
+        return value
+    
+    while not solved:
+        res     = check()
+        if res != 0:
+            return res
+        else:
+            value += 20
+            
         
         
 
 if __name__ == '__main__':
-    print("Question One:")
-    print(mults_of_ns([3,5],limit=1000))
-    n = 100000
-    print ("\nQuestion Two:")
-    print (listSolve(n))
-    print (int_while(n))
+#    print("Question One:")
+#    print(mults_of_ns([3,5],limit=1000))
+#    n = 100000
+#    print ("\nQuestion Two:")
+#    print (listSolve(n))
+#    print (int_while(n))
+    print(smallest_multiple(40))
