@@ -181,3 +181,4 @@ if __name__ == '__main__':
 #    pos     = times.index(fastest)
 #    print(fastest, pos)
     print(3797 in primes_until(10001))
+    
