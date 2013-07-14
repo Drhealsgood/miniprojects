@@ -44,8 +44,22 @@ class MyString():
                 word_count = len(f.read().split())
         return word_count
     
+    def find_in_iter(self,some_iter):
+        """
+        just an examplke for someone.
+        """
+        if isinstance(some_iter,str):
+            cond    = lambda sequence, string: [char for char in string if char in sequence] 
+            vowels  = ("a,e,i,o,u")
+            return [word for word in some_iter.lower().split(" ") if len(cond(vowels,word)) > 1]
+        elif isinstance(some_iter[0],int):
+            return [num for num in some_iter if num > 5]
+            
     
     
 
 if __name__ == '__main__':
-    pass
+    x       = MyString()
+    word    = x.find_in_iter("a barbie vanquished the knights of the round table by hitting them in the face")
+    num     = x.find_in_iter(range(10))
+    print(word, '\n', num)
