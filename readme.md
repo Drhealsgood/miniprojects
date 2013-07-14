@@ -1,6 +1,6 @@
 A bunch of mini-projects inspired from [thekarangoel](https://github.com/thekarangoel)
 
-A few have been editted to near completion of the question a lot of the time in a more abstract sense. I may be 100% explicit in answering at some stage. Examples include the coin_change program - I mean, fuck just limiting our denominators to pennies etc.
+A few have been completed to a more abstract sense of the question. I may be 100% explicit in answering at some stage. Examples include the coin_change program - I mean, fuck just limiting our denominators to pennies etc.
 
 Martyr2’s Mega Project List
 ========
