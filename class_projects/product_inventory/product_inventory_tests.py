@@ -116,17 +116,24 @@ class TestProductFactory(unittest.TestCase):
             self.assertIsInstance(prod, cls, "{0} is not instance of {1}".format(prod, cls))
 
 class TestProduct(unittest.TestCase):    
+    """
+    @todo: guess.
+    """
     #product class which has a price, id, and quantity on hand
     
     def testInit(self):
         """
         A Product should have an id, a name (which product it is)
         """
+        pass
         
 
 class TestProductInventory(unittest.TestCase):
     # Create an Inventory Factory to create Inventories
     # and a Product Factory for Products
+    """
+    @todo: guess.
+    """
     inv_factory             = product_inventory.InventoryFactory()
     prod_factory            = product_inventory.ProductFactory()
 
@@ -137,10 +144,6 @@ class TestProductInventory(unittest.TestCase):
         # reset inventories and products
         self.inventories    = []
         self.products       = []
-
-
-    def testName(self):
-        pass
 
 
 if __name__ == "__main__":
