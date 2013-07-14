@@ -24,7 +24,7 @@ Numbers
 
 [**Next Prime Number**](https://github.com/Drhealsgood/miniprojects/blob/master/project_euler/euler.py) – Have the program find prime numbers until the user chooses to stop asking for the next one.
 
-**Find Cost of Tile to Cover W x H Floor** – Calculate the total cost of tile it would take to cover a floor plan of width and height, using a cost entered by the user.
+[**Find Cost of Tile to Cover W x H Floor**](https://github.com/Drhealsgood/miniprojects/blob/master/number_projects/other/misc.py) – Calculate the total cost of tile it would take to cover a floor plan of width and height, using a cost entered by the user.
 
 **Mortgage Calculator** – Calculate the monthly payments of a fixed term mortgage over given Nth terms at a given interest rate. Also figure out how long it will take the user to pay back the loan.
 
@@ -54,7 +54,7 @@ Text
 [**Reverse a String**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing.py) – Enter a string and the program will reverse it and print it out.
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing_tests.py)
 
-**Pig Latin** – Pig Latin is a game of alterations played on the English language game. To create the Pig Latin form of an English word the initial consonant sound is transposed to the end of the word and an ay is affixed (Ex.: "banana" would yield anana-bay). Read Wikipedia for more information on rules.
+[**Pig Latin**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing.py) – Pig Latin is a game of alterations played on the English language game. To create the Pig Latin form of an English word the initial consonant sound is transposed to the end of the word and an ay is affixed (Ex.: "banana" would yield anana-bay). Read Wikipedia for more information on rules.
 
 [**Count Vowels**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing.py) – Enter a string and the program counts the number of vowels in the text. For added complexity have it report a sum of each vowel found.
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing_tests.py)
@@ -87,7 +87,7 @@ Text
 
 **CD Key Generator** – Generates a unique key for your applications to use based on some arbitrary algorithm that you can specify. Great for software developers looking to make shareware that can be activated.
 
-**Regex Query Tool** – A tool that allows the user to enter a text string and then in a separate control enter a regex pattern. It will run the regular exp****ression against the source text and return any matches or flag errors in the regular exp****ression.
+**Regex Query Tool** – A tool that allows the user to enter a text string and then in a separate control enter a regex pattern. It will run the regular expression against the source text and return any matches or flag errors in the regular expression.
 
 Networking
 ---------
