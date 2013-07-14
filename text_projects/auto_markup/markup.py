@@ -7,6 +7,7 @@ import re
 
 class Utils():
     
+    @classmethod
     def getBlocks(self,text):
         """
         we want to read the text in line at a time so we 
@@ -112,11 +113,34 @@ class Parser(object):
         def parse_help():
             # apply starting document rule
             yield self.handler.start("document")
+            for block in Utils.getBlocks(self,content):
+                # apply filters
+                for filter_meth in self.filters: 
+                    block   = filter_meth(block,self.handler)
+                # apply rules
+                for rule in self.rules:
+                    if rule.condition(block): # check to see if condition applies
+                        action  = rule.action(block,self.handler)
+                        # yield action if one exists
+                        if action:
+                            yield action
+                        break;
+            # apply end document rule    
+            yield self.handler.end("document")
         
         return "".join([x for x in self.parse_help(content) if isinstance(x,str)])
     
+class HTMLRenderer(Handler):
+    
+    def start_document(self):
+        """
+        @return: basic start of HTML document
+        """
+        return '<html><head><title></title></head><body>'
+    
+    def sub_emphasis(self,match):
+        return '<em>%s</em>'.format(match.group(1))
+    
 if __name__ == "__main__":
-    x   = Utils
-    gb  = x.getBlocks
-    for i in gb("../string_editing.py","../string_editing.py"):
-        print(i)
+    x   = Parser(HTMLRenderer)
+    x.add_filter(r"\*(.+?)\*", 'emphasis')
