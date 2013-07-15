@@ -69,16 +69,10 @@ class HTMLRenderer(Handler):
     def sub_emphasis(self,match):
         return '<em>%s</em>'.format(match.group(1))
     
-    def wtf(self):
-        return "what is going on here?"
-    
-
 class Parser(object):
     '''
     classdocs
     '''
-
-
     def __init__(self,handler):
         '''
         Constructor
@@ -86,28 +80,24 @@ class Parser(object):
         rules and filters handles layout while filters
         handle detection of strings such as emphasis/mail
         '''
-        print(handler)
-        self.__handler    = handler
-        print(self.__handler)
-        self.testing    = handler
-        print(self.testing)
-        self.rules      = []
-        self.filters    = []
+        self._handler   = handler
+        self._rules     = []
+        self._filters   = []
         
     @property
     def handler(self):
-        return self.handler
+        return self._handler
     
     @property
     def rules(self):
-        return self.rules
+        return self._rules
     
     def add_rule(self, rule):
-        self.rules.append(rule)
+        self._rules.append(rule)
     
     @property
     def filters(self):
-        return self.filters
+        return self._filters
     
     def add_filter(self, pattern, name):
         """
@@ -121,7 +111,7 @@ class Parser(object):
             @param handler: renderer
             """
             return re.sub(pattern,handler.sub(name),block)
-        self.filters.append(filter)
+        self._filters.append(filter)
         
     def parse(self,content):
         """
@@ -152,6 +142,5 @@ class Parser(object):
     
 if __name__ == "__main__":
     y       = HTMLRenderer()
-    print(y, y.wtf())
     x       = Parser(y)
     x.add_filter(r"\*(.+?)\*", 'emphasis')
