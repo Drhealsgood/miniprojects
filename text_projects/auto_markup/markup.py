@@ -69,6 +69,14 @@ class HTMLRenderer(Handler):
     def sub_emphasis(self,match):
         return '<em>%s</em>'.format(match.group(1))
     
+    
+class Rule(object):
+    """
+    A rule has a condition and an action.
+    If the condition is met, the action will be applied.
+    """
+    pass
+    
 class Parser(object):
     '''
     classdocs
