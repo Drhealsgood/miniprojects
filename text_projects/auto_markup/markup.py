@@ -2,13 +2,20 @@
 Created on 15/07/2013
 
 @author: luke
+
+@todo: still not reading in the content correctly;
+implement more rules and filters
 '''
+from abc import *
 import re
 
 class Utils():
+    """
+    @todo: modify getBlocks String to work correctly.
+    """
     
     @classmethod
-    def getBlocks(self,text):
+    def getBlocksFile(self,text):
         """
         we want to read the text in line at a time so we 
         can apply our rules and stuff
@@ -20,6 +27,18 @@ class Utils():
                     block.append(line)
                 elif block:
                     yield ''.join(block).strip()
+                    block   = []
+        return list(blocks())
+    
+    @classmethod
+    def getBlocksString(self,text):
+        def blocks():
+            block   = []
+            for line in text.split("\n"):
+                if line.strip():
+                    block.append(line)
+                elif block:
+                    yield ''.join(block)
                     block   = []
         return list(blocks())
 
@@ -45,7 +64,7 @@ class Handler():
         end simply calls the method end_name
         where name is the param passed
         """
-        return self.callback('end', name)
+        return self.callback('end_', name)
     
     def sub(self,name):
         """
@@ -58,13 +77,97 @@ class Handler():
             return result
         return substitution
     
+class HTMLRenderer(Handler):
+    
+    # html document rules
+    def start_document(self):
+        """
+        @return: basic start of HTML document
+        """
+        return '<html><head><title></title></head><body>'
+    
+    def end_document(self):
+        return '</body></html>'
 
+    # paragraph rules
+    def start_paragraph(self):
+        return '<p>'
+    
+    def end_paragraph(self):
+        return '</p>'
+    
+    # heading rules
+    def start_heading(self):
+        return '<h1>'
+    
+    def end_heading(self):
+        return '</h1>'
+    
+    # substitutions
+    def sub_emphasis(self,match):
+        return '<em>{0}</em>'.format(match.group(1))
+    
+    def data(self,block):
+        return block
+    
+    
+class Rule(metaclass=ABCMeta):
+    """
+    A rule has a condition and an action and a type.
+    If the condition is met, the action will be applied.
+    Each rule should have a type to explain its intention, no type means there 
+    is no rule to accomplish 
+    """
+    def action(self, block, handler):
+        """
+        @return: String - block with rule applied or Boolean - NA
+            Action should be the same for all rules
+        """
+        if self._type:
+            # feed handler instructions > start > data > end for block modifications
+            return ''.join([handler.start(self._type),handler.data(block),handler.end(self._type)])
+        # if there is no type return False - there is no rule.
+        return False
+    
+    @abstractmethod
+    def condition(self,block):
+        """
+        @return: Boolean
+            Check to see if block meets condition of the rule
+        """
+        return False
+        
+    def type(self):
+        """
+            @return: String representation of the rule type
+        """
+        return self._type
+    
+class HeadingRule(Rule):
+    """
+        HeadingRule condition: A block is a Heading if:    
+                 it is one line (does not contain \n)
+                 lte 70 characters
+    """
+    _type       = "heading"
+    
+    def condition(self,block):
+        return (('\n' not in block) and (len(block)<=70))
+    
+class ParagraphRule(Rule):
+    """
+        ParagraphRule is going to be the end rule as it's
+        the default rule if no others are followed up - for HTML
+    """
+    _type       = "paragraph"
+    
+    def condition(self, block):
+        return True
+    
 class Parser(object):
     '''
     classdocs
     '''
-
-
     def __init__(self,handler):
         '''
         Constructor
@@ -72,24 +175,24 @@ class Parser(object):
         rules and filters handles layout while filters
         handle detection of strings such as emphasis/mail
         '''
-        self.handler    = handler
-        self.rules      = []
-        self.filters    = []
+        self._handler   = handler
+        self._rules     = []
+        self._filters   = []
         
     @property
     def handler(self):
-        return self.handler
+        return self._handler
     
     @property
     def rules(self):
-        return self.rules
+        return self._rules
     
     def add_rule(self, rule):
-        self.rules.append(rule)
+        self._rules.append(rule)
     
     @property
     def filters(self):
-        return self.filters
+        return self._filters
     
     def add_filter(self, pattern, name):
         """
@@ -97,13 +200,13 @@ class Parser(object):
         @param pattern: pattern to find, eg r'\8(.+?)\*
         @param name:    name of the pattern
         """
-        def filter(block,handler):
+        def apply_filter(block,handler):
             """
             @param block: the block of text we are working with
             @param handler: renderer
             """
             return re.sub(pattern,handler.sub(name),block)
-        self.filters.append(filter)
+        self._filters.append(apply_filter)
         
     def parse(self,content):
         """
@@ -113,14 +216,15 @@ class Parser(object):
         def parse_help():
             # apply starting document rule
             yield self.handler.start("document")
-            for block in Utils.getBlocks(self,content):
+            for block in Utils.getBlocksString(content):
                 # apply filters
                 for filter_meth in self.filters: 
                     block   = filter_meth(block,self.handler)
                 # apply rules
-                for rule in self.rules:
+                for rule in self._rules:
                     if rule.condition(block): # check to see if condition applies
-                        action  = rule.action(block,self.handler)
+                        
+                        action  = rule.action(block,self._handler)
                         # yield action if one exists
                         if action:
                             yield action
@@ -128,19 +232,18 @@ class Parser(object):
             # apply end document rule    
             yield self.handler.end("document")
         
-        return "".join([x for x in self.parse_help(content) if isinstance(x,str)])
+        return "".join([x for x in parse_help() if isinstance(x,str)])
     
-class HTMLRenderer(Handler):
-    
-    def start_document(self):
-        """
-        @return: basic start of HTML document
-        """
-        return '<html><head><title></title></head><body>'
-    
-    def sub_emphasis(self,match):
-        return '<em>%s</em>'.format(match.group(1))
+
     
 if __name__ == "__main__":
-    x   = Parser(HTMLRenderer)
+    y       = HTMLRenderer()
+    x       = Parser(y)
+    block   = """\n
+This is a bunch of text to keep *you* entertained\n whilst I test my failure of a program and yeah
+    """
+    x.add_rule(ParagraphRule())
     x.add_filter(r"\*(.+?)\*", 'emphasis')
+    t       = x.parse(block)
+    print(t)
+    
