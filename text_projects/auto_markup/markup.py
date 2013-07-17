@@ -2,6 +2,9 @@
 Created on 15/07/2013
 
 @author: luke
+
+@todo: still not reading in the content correctly;
+implement more rules and filters
 '''
 from abc import *
 import re
