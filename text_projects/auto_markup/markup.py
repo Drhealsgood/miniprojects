@@ -240,10 +240,10 @@ if __name__ == "__main__":
     y       = HTMLRenderer()
     x       = Parser(y)
     block   = """\n
-This is a bunch of text to keep *you* entertained\n whilst I test my failure of a program and yeah
+This is a bunch of *text to keep you* entertained\n whilst I test my failure of a program and yeah
     """
     x.add_rule(ParagraphRule())
-    x.add_filter(r"\*(.+?)\*", 'emphasis')
+    x.add_filter(r"\*(.+|.?)\*", 'emphasis')
     t       = x.parse(block)
     print(t)
     
