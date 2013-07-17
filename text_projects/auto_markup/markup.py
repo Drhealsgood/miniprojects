@@ -102,7 +102,7 @@ class HTMLRenderer(Handler):
     
     # substitutions
     def sub_emphasis(self,match):
-        return '<em>%s</em>'.format(match.group(1))
+        return '<em>{0}</em>'.format(match.group(1))
     
     def data(self,block):
         return block
@@ -122,9 +122,6 @@ class Rule(metaclass=ABCMeta):
         """
         if self._type:
             # feed handler instructions > start > data > end for block modifications
-            print(handler.start(self._type))
-            print(handler.data(block))
-            print(handler.end(self._type))
             return ''.join([handler.start(self._type),handler.data(block),handler.end(self._type)])
         # if there is no type return False - there is no rule.
         return False
@@ -217,13 +214,11 @@ class Parser(object):
             # apply starting document rule
             yield self.handler.start("document")
             for block in Utils.getBlocksString(content):
-                print("Block: ", block)
                 # apply filters
                 for filter_meth in self.filters: 
                     block   = filter_meth(block,self.handler)
                 # apply rules
                 for rule in self._rules:
-                    print(block, rule.condition(block))
                     if rule.condition(block): # check to see if condition applies
                         
                         action  = rule.action(block,self._handler)
@@ -242,9 +237,10 @@ if __name__ == "__main__":
     y       = HTMLRenderer()
     x       = Parser(y)
     block   = """\n
-This is a bunch of text to keep you entertained\n whilst I test my failure of a program and yeah
+This is a bunch of text to keep *you* entertained\n whilst I test my failure of a program and yeah
     """
     x.add_rule(ParagraphRule())
+    x.add_filter(r"\*(.+?)\*", 'emphasis')
     t       = x.parse(block)
     print(t)
-    x.add_filter(r"\*(.+?)\*", 'emphasis')
+    
