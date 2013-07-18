@@ -139,6 +139,18 @@ def primes_until(n):
     return y
 
 #===============================================================================
+# http://projecteuler.net/problem=26
+#===============================================================================
+def reciprocal_cycles(n):
+    
+    results     = {}
+    # collect results
+    for i in range(1,n):
+        x       = 1/i
+        results[len(str(x))]    = x
+        
+
+#===============================================================================
 # # http://projecteuler.net/problem=29
 #===============================================================================
 
@@ -188,6 +200,8 @@ if __name__ == '__main__':
 #    fastest = max(times)
 #    pos     = times.index(fastest)
 #    print(fastest, pos)
+# 26
+    print(reciprocal_cycles(10))
 # 29
     print(distinct_powers(100,100))
     print(3797 in primes_until(10001))
