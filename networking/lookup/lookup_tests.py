@@ -24,7 +24,9 @@ class TestLookup(unittest.TestCase):
         (name,code) = Lookup.countryFromName('duckduckgo.com')
         self.assertEqual(name,"Singapore")
         self.assertEqual(code,'SG')
-
+        
+    def testWhoIs(self):
+        Lookup.whois('101.98.154.154')
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
