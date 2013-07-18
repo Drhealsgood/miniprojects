@@ -110,7 +110,8 @@ Networking
 
 **Packet Sniffer** – A utility program that will read packets coming in and out of the machine along with related information like destination and payload size.
 
-**Country from IP Lookup** – Enter an IP address and find the country that IP is registered in.
+[**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup_tests.py)
+[**Country from IP Lookup**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup.py) – Enter an IP address and find the country that IP is registered in.
 
 **Whois Search Tool** – Enter an IP or host address and have it look it up through whois and return the results to you.
 
