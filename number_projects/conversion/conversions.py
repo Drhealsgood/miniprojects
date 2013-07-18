@@ -6,21 +6,24 @@ Created on 12/07/2013
 
 class Converter():
     
-    def binToDec(self, bin_no):
+    @classmethod
+    def binToDec(cls, bin_no):
         """
         @param bin_no:  a string representation of a binary number
         @return:        an integer value of the binary number passed
         """
         pass
     
-    def decToBin(self, dec_no):
+    @classmethod
+    def decToBin(cls, dec_no):
         """
         @param dec_no:  an integer value 
         @return:        a string representation of the decimal value passed
         """
         pass
     
-    def currencyExchange(self,con_from,con_to,value):
+    @classmethod
+    def currencyExchange(cls,con_from,con_to,value):
         """
         @param con_from:a string representation of the currency to convert from
         @param con_to:  a string representation of the currency to convert to
@@ -29,7 +32,8 @@ class Converter():
         """
         pass
     
-    def tempConvert(self,msr_from,msr_to,amt):
+    @classmethod
+    def tempConvert(cls,msr_from,msr_to,amt):
         """
         @param msr_from:a string representation of the measurement to convert from
         @param msr_to:  a string representation of the measurement to convert to

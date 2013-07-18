@@ -10,7 +10,7 @@ import urllib.request
 
 
 class TestConverter(unittest.TestCase):
-    converter   = conversions.Converter()
+    converter   = conversions.Converter
 
     def testBinaryToDecimal(self):
         binToDec    = lambda value: self.converter.binToDec(value) 
