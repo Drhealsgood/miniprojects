@@ -3,19 +3,17 @@ Created on 15/07/2013
 
 @author: luke
 
-@todo: still not reading in the content correctly;
-implement more rules and filters
+@todo: implement more rules and filters; tests.
 '''
 from abc import *
 import re
 
 class Utils():
     """
-    @todo: modify getBlocks String to work correctly.
     """
     
     @classmethod
-    def getBlocksFile(self,text):
+    def getBlocksFile(cls,text):
         """
         we want to read the text in line at a time so we 
         can apply our rules and stuff
@@ -31,7 +29,7 @@ class Utils():
         return list(blocks())
     
     @classmethod
-    def getBlocksString(self,text):
+    def getBlocksString(cls,text):
         def blocks():
             block   = []
             for line in text.split("\n"):
@@ -41,6 +39,12 @@ class Utils():
                     yield ''.join(block)
                     block   = []
         return list(blocks())
+    
+    @classmethod
+    def output(cls,content):
+        with open('output/output.html','w') as f:
+            f.write(content)
+        assert(f.closed)
 
 class Handler():
     def callback(self,prefix,name,*args):
@@ -104,8 +108,8 @@ class HTMLRenderer(Handler):
         return '</h1>'
     
     # substitutions
-    def sub_emphasis(self,match):
-        return '<em>{0}</em>'.format(match.group(1))
+    def sub_strong(self,match):
+        return '<strong>{0}</strong>'.format(match.group(1))
     
     def data(self,block):
         return block
@@ -216,7 +220,7 @@ class Parser(object):
         def parse_help():
             # apply starting document rule
             yield self.handler.start("document")
-            for block in Utils.getBlocksString(content):
+            for block in Utils.getBlocksFile(content):
                 # apply filters
                 for filter_meth in self.filters: 
                     block   = filter_meth(block,self.handler)
@@ -239,11 +243,9 @@ class Parser(object):
 if __name__ == "__main__":
     y       = HTMLRenderer()
     x       = Parser(y)
-    block   = """\n
-This is a bunch of *text to keep you* entertained\n whilst I test my failure of a program and yeah
-    """
+    f       = "../test_resources/markup_text.txt"
     x.add_rule(ParagraphRule())
-    x.add_filter(r"\*(.+|.?)\*", 'emphasis')
-    t       = x.parse(block)
-    print(t)
+    x.add_filter(r"\*(.+|.?)\*", 'strong')
+    t       = x.parse(f)
+    Utils.output(t)
     
