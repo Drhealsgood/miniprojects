@@ -138,6 +138,14 @@ def primes_until(n):
         if i >= target: break;
     return y
 
+#===============================================================================
+# # http://projecteuler.net/problem=29
+#===============================================================================
+
+def distinct_powers(n,m):
+    return len(set([i**j for i in range(2,n+1) for j in range(2,m+1)]))
+
+# 37
 def problem_thirty_seven():
     primes  = primes_until(10001)
     
@@ -180,5 +188,7 @@ if __name__ == '__main__':
 #    fastest = max(times)
 #    pos     = times.index(fastest)
 #    print(fastest, pos)
+# 29
+    print(distinct_powers(100,100))
     print(3797 in primes_until(10001))
     
