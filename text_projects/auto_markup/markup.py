@@ -191,8 +191,12 @@ class Parser(object):
     def rules(self):
         return self._rules
     
-    def add_rule(self, rule):
-        self._rules.append(rule)
+    def add_rule(self, *args):
+        """
+        Remember the order in which rules are added is important
+        """
+        for rule in args:
+            self._rules.append(rule)
     
     @property
     def filters(self):
@@ -244,7 +248,7 @@ if __name__ == "__main__":
     y       = HTMLRenderer()
     x       = Parser(y)
     f       = "../test_resources/markup_text.txt"
-    x.add_rule(ParagraphRule())
+    x.add_rule(HeadingRule(),ParagraphRule())
     x.add_filter(r"\*(.+|.?)\*", 'strong')
     t       = x.parse(f)
     Utils.output(t)
