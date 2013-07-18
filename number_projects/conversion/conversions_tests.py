@@ -14,15 +14,15 @@ class TestConverter(unittest.TestCase):
 
     def testBinaryToDecimal(self):
         binToDec    = lambda value: self.converter.binToDec(value) 
-        tests       = {'1010':10,'0010':2,'00011010':26}
+        tests       = {'1010':10,'0010':2,'01111101':125}
         for bin in tests:
             self.assertEqual(binToDec(bin), tests[bin])
 
     def testDecimalToBinary(self):
-        decToBin    = lambda value: self.converter.decToBin(value)
-        tests       = {'1010':10,'0010':2,'00011010':26}
+        decToBin    = lambda value, br: self.converter.decToBin(value, br)
+        tests       = {'1010':(4,10),'0010':(4,2),'01111101':(8,125)}
         for bin in tests:
-            self.assertEquals(decToBin(tests[bin]), bin)
+            self.assertEquals(decToBin(tests[bin][1],tests[bin][0]), bin)
             
     def testTemperatureConversion(self):
         conversion  = lambda msr_from, msr_to, amt: self.converter.tempConvert(msr_from, msr_to, amt)

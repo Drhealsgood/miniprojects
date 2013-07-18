@@ -120,7 +120,9 @@ Networking
 
 [**Country from IP Lookup**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup.py) – Enter an IP address and find the country that IP is registered in.
 
-**Whois Search Tool** – Enter an IP or host address and have it look it up through whois and return the results to you.
+[**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup_tests.py)
+
+[**Whois Search Tool**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup.py) – Enter an IP or host address and have it look it up through whois and return the results to you.
 
 **Zip / Postal Code Lookup** – Enter a zip or postal code and have it return which city/cities that are in that zip code.
 

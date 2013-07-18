@@ -3,6 +3,7 @@ Created on 12/07/2013
 
 @author: luke
 '''
+from math import ceil
 
 class Converter():
     
@@ -15,12 +16,16 @@ class Converter():
         pass
     
     @classmethod
-    def decToBin(cls, dec_no):
+    def decToBin(cls, dec_no, bit_rep):
         """
         @param dec_no:  an integer value 
+        @param bit_rep: bit representation amount
         @return:        a string representation of the decimal value passed
         """
-        pass
+        if dec_no > 0:
+            return str(bin(dec_no)[2:].zfill(bit_rep))
+        return '-' + str(bin(dec_no))[2:].zfill(bit_rep)
+        
     
     @classmethod
     def currencyExchange(cls,con_from,con_to,value):
