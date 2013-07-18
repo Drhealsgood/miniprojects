@@ -5,7 +5,7 @@ Created on 15/07/2013
 
 @todo: implement more rules and filters; tests.
 '''
-from abc import *
+from abc import ABCMeta, abstractmethod
 import re
 
 class Utils():
@@ -14,10 +14,6 @@ class Utils():
     
     @classmethod
     def getBlocksFile(cls,text):
-        """
-        we want to read the text in line at a time so we 
-        can apply our rules and stuff
-        """
         def blocks():
             block   = []
             for line in open(text,'r').readlines():
@@ -56,7 +52,6 @@ class Handler():
         
     def start(self, name):
         """
-        start rules
         start simply calls the method start_name
         where name is the param passed
         """
@@ -64,7 +59,6 @@ class Handler():
     
     def end(self,name):
         """
-        end rules
         end simply calls the method end_name
         where name is the param passed
         """
@@ -239,7 +233,7 @@ class Parser(object):
                         break;
             # apply end document rule    
             yield self.handler.end("document")
-        
+            
         return "".join([x for x in parse_help() if isinstance(x,str)])
     
 
