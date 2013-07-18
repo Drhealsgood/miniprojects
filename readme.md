@@ -33,11 +33,13 @@ Numbers
 [**Change Return Program**](https://github.com/Drhealsgood/miniprojects/blob/master/number_projects/money_changing/money_changing.py) – The user enters a cost and then the amount of money given. The program will figure out the change and the number of quarters, dimes, nickels, pennies needed for the change.
 
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/number_projects/conversion/conversions_tests.py)
+
 [**Binary to Decimal and Back Converter**](https://github.com/Drhealsgood/miniprojects/blob/master/number_projects/conversion/conversions.py) – Develop a converter to convert a decimal number to binary or a binary number to its decimal equivalent.
 
 **Calculator** – A simple calculator to do basic operators. Make it a scientific calculator for added complexity.
 
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/number_projects/conversion/conversions_tests.py)
+
 [**Unit Converter (temp, currency, volume, mass and more)**](https://github.com/Drhealsgood/miniprojects/blob/master/number_projects/conversion/conversions.py) – Converts various units between one another. The user enters the type of unit being entered, the type of unit they want to convert to and then the value. The program will then make the conversion.
 
 **Alarm Clock** – A simple clock where it plays a sound after X number of minutes/seconds or at a particular time.
@@ -54,17 +56,21 @@ Text
 ---------
 
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing_tests.py)
+
 [**Reverse a String**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing.py) – Enter a string and the program will reverse it and print it out.
 
 [**Pig Latin**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing.py) – Pig Latin is a game of alterations played on the English language game. To create the Pig Latin form of an English word the initial consonant sound is transposed to the end of the word and an ay is affixed (Ex.: "banana" would yield anana-bay). Read Wikipedia for more information on rules.
 
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing_tests.py)
+
 [**Count Vowels**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing.py) – Enter a string and the program counts the number of vowels in the text. For added complexity have it report a sum of each vowel found.
 
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing_tests.py)
+
 [**Check if Palindrome**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing.py) – Checks if the string entered by the user is a palindrome. That is that it reads the same forwards as backwards like “racecar”
 
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing_tests.py)
+
 [**Count Words in a String**](https://github.com/Drhealsgood/miniprojects/blob/master/text_projects/string_editing.py) – Counts the number of individual words in a string. For added complexity read these strings in from a text file and generate a summary.
 
 **Text Editor** – Notepad style application that can open, edit, and save text documents. Add syntax highlighting and other features.
@@ -111,6 +117,7 @@ Networking
 **Packet Sniffer** – A utility program that will read packets coming in and out of the machine along with related information like destination and payload size.
 
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup_tests.py)
+
 [**Country from IP Lookup**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup.py) – Enter an IP address and find the country that IP is registered in.
 
 **Whois Search Tool** – Enter an IP or host address and have it look it up through whois and return the results to you.
@@ -129,6 +136,7 @@ Classes
 ---------
 
 [**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/class_projects/product_inventory/product_inventory_tests.py)
+
 [**Product Inventory Project**](https://github.com/Drhealsgood/miniprojects/blob/master/class_projects/product_inventory/product_inventory.py) – Create an application which manages an inventory of products. Create a product class which has a price, id, and quantity on hand. Then create an inventory class which keeps track of various products and can sum up the inventory value.
 
 **Movie Store** – Manage video rentals and controls when videos are checked out, due to return, overdue fees and for added complexity create a summary of those accounts which are overdue for contact.
