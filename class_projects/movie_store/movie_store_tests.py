@@ -55,8 +55,27 @@ class TestMovie_Store(unittest.TestCase):
         self._store.add_stock(10)
         self.assertEqual(len(self._store.stock)-curr,1) and self.assertIn(10,self._store.stock)
         
-
-
+class TestAccount():
+    account     = movie_store.Account("Torez, Evon")
+    """
+    an account will have an id, a name for the account holder, 
+    the rentals the account has, an address, and a contact number
+    """
+    def testid(self):
+        self.assertEqual(0,self.account.id)
+        
+    def testName(self):
+        self.assertEqual("Torez, Evon",self.account.name)
+        self.account.name   = "Store, Movie"
+        self.assertEqual("Store, Movie", self.account.name)
+        
+    def testRenting(self):
+        store   = movie_store.Store()
+        store.add_stock(1)
+        store.add_customer("Store, Movie")
+        store.rent(1,0)
+        self.assertIn(1,self.account.renting)
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
