@@ -21,7 +21,11 @@ class MyString():
                                 No. of vowels or 0
         """
         vowels      = "aeiou"
-        return len([char for char in string if char in vowels])
+        count       = {char:0 for char in vowels}
+        for char in string:
+            if char in vowels:
+                count[char] += 1
+        return count
     
     def is_palindrome(self,some_seq):
         """
