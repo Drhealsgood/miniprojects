@@ -39,7 +39,7 @@ class StringEditingTests(unittest.TestCase):
             Count vowels will take a string and return the amount of vowels contained in the string
         """
         some_string     = "testing one two three" # 7 vowels
-        no_vowels       = 7
+        no_vowels       = {'o': 2, 'e': 4, 'u': 0, 'i': 1, 'a': 0}
         actual          = self.myString.count_vowels(some_string)
         self.assertEqual(actual, no_vowels, "{0} expected, but got {1}".format(no_vowels, actual))
         

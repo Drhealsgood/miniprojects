@@ -83,5 +83,6 @@ if __name__ == '__main__':
     string  = "a barbie vanquished the knights of the round table by hitting them in the face"
 #    word    = x.find_in_iter(string)
 #    num     = x.find_in_iter(range(10))
+    print(x.count_vowels(string))
 #    print(word, '\n', num)
-    print(x.piglatin(string))
+    #print(x.piglatin(string))
