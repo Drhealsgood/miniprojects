@@ -1,6 +1,6 @@
 A bunch of mini-projects inspired from [thekarangoel](https://github.com/thekarangoel)
 
-A few have been completed to a more abstract sense of the question. I may be 100% explicit in answering at some stage. Examples include the coin_change program - I mean, fuck just limiting our denominators to pennies etc.
+A few have been completed to a more abstract sense of the question. I may be 100% explicit in answering at some stage or might end up just leaving the problems in functions/classes to be called from main.
 
 Martyr2’s Mega Project List
 ========
@@ -10,7 +10,8 @@ Trying to complete all projects from [Martyr2’s Mega Project List](http://www.
 Project Euler
 ========
 
-Also attempting [Project Euler](http://projecteuler.net/) problems along the way just beacuse.
+Also attempting [Project Euler](http://projecteuler.net/) problems along the way because some of the problems overlap; project euler problems are fun and challenging, and just because.
+
 
 **Note**: If you fork this repo to solve these projects in any language of your choice, please remove all my code, and start from scratch; you'll benefit a lot. Do ***not*** send pull requests.
 
@@ -120,7 +121,7 @@ Networking
 
 [**Country from IP Lookup**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup.py) – Enter an IP address and find the country that IP is registered in.
 
-[**Tests**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup_tests.py)
+[**Whois call in tests**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup_tests.py)
 
 [**Whois Search Tool**](https://github.com/Drhealsgood/miniprojects/blob/master/networking/lookup/lookup.py) – Enter an IP or host address and have it look it up through whois and return the results to you.
 
