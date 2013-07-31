@@ -11,6 +11,7 @@ IDoes the ISBN-13 have any meaning imbedded in the numbers?
     4. Title identifier which identifies a particular title or edition of a title;
     5. Check digit is the single digit at the end of the ISBN which validates the ISBN.
 '''
+import random
 import unittest
 from library_catalog import Book, Library
 
@@ -80,7 +81,28 @@ class TestLibrary(unittest.TestCase):
     hired; the ability to check in and check out books; the ability
     to add/remove books from the library permanently.
     """
+    gen_isbn    = lambda size: "".join([random.randint() for _ in range(size)])
     _library    = Library()
+    __books     = [
+                   Book("book_two",gen_isbn(13),"author_two","genre_two"),
+                   Book("book_three",gen_isbn(13),"author_three","genre_three"),
+                   Book("book_four",gen_isbn(13),"author_four","genre_four"),
+                   Book("book_five",gen_isbn(13),"author_five","genre_five"),
+                   Book("book_six",gen_isbn(13),"author_six","genre_six"),
+                   Book("book_seven",gen_isbn(13),"author_seven","genre_seven"),
+                   ]
+    
+    def testAddBooks(self):
+        """
+        should be able to add books to library catalog. Should only accept
+        books; should return True to indicate success
+        """
+        self.assertRaises(TypeError,self._library.add_books("NOT A BOOK LOLOLOLOL"))
+        self.assertTrue(self._library.add_books(book for book in self.__books))
+        
+                
+    
+    
         
 
 if __name__ == "__main__":
