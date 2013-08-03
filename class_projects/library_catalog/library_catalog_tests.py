@@ -169,9 +169,11 @@ class TestLibrary(unittest.TestCase):
             
     def testCheckOut(self):
         """
+        testCheckout also tests books_out
         checkOut ensures book is not currently out and exists in library catalog;
         checkout then checks the book out to a customer
         """
+        
         # add default books to library
         self._library.add_books(book for book in self.__books) 
         book    = self._library.books_all[0]
@@ -182,22 +184,27 @@ class TestLibrary(unittest.TestCase):
         self.assertIn(book,self._library.books_out)
         # booksout[book] should link to person who got book out and what date
         self.assertEqual(self._library.books_out[book],("Garry",today))
+        # books_out should only contain one book as only one has been withdrawn
+        self.assertEqual(len(self._library.books_out),1)
+        # when a book is checked out it should be removed from books_in
+        self.assertEqual(len(self._library.books_in),len(self._library.books_all)-1)
+        self.assertNotIn(book,self._library.books_in)
         
-    
     def testBooksOut(self):
-        """
-        Library should either keep track or be able to return all
-        books currently out
-        """
         # a Library with no books should return False
         self.assertFalse(self._library.books_out)
-        # add books
-    
+        # other testing logic taken care of in testCheckOut
+        
     def testBooksIn(self):
         """
         Library should be able to return all books currently IN
         """
-        pass
+        # a Library with no books should not have any  in
+        self.assertFalse(self._library.books_in)
+        # when books are added they should all be in Books In
+        self._library.add_books(book for book in self.__books)
+        self.assertEqual(self._library.books_all,self._library.books_in)
+        # other testing logic taken care of in testCheckOut
     
    
         
