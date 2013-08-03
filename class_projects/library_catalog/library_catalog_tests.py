@@ -81,7 +81,7 @@ class TestLibrary(unittest.TestCase):
     hired; the ability to check in and check out books; the ability
     to add/remove books from the library permanently.
     """
-    gen_isbn    = lambda size: "".join([random.randint() for _ in range(size)])
+    gen_isbn    = lambda size: "".join([str(random.randint(0,9)) for _ in range(size)])
     _library    = Library()
     __books     = [
                    Book("book_two",gen_isbn(13),"author_two","genre_two"),
