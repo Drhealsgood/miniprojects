@@ -109,9 +109,10 @@ class TestBook(unittest.TestCase):
         """
         # It's presumed a book that has just been added to the 
         # library will not be checked out
-        self.assertFalse(self._book.checked_out,"Book should not yet be checked out")
+        self.assertFalse(self._book.checked_out[0],"Book should not yet be checked out")
         self._book.checked_out      = True
-        self.assertTrue(self._book.checked_out)
+        # date should be noted in checked_out status
+        self.assertEqual(self._book.checked_out,(True,date.today()))
         with self.assertRaises(TypeError):
             self._book.checked_out  = "True"
             
