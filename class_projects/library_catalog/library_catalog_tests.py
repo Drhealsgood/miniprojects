@@ -18,18 +18,27 @@ from library_catalog import Book, Library
 class TestBook(unittest.TestCase):
     """
     A book should have a title, an ISBN, an author, a genre
+    and a checked out status.
+    Title, isbn, author, genre should be string and 
+    checked out should be bool
     """
     _book      = Book(title="Book Tests", isbn="0000111125433",
                            author="Book Writer", genre="Educational",)
     _class_vars= vars(_book)
     
-#    def testInit(self):
-#        """
-#        On creation a book should have a title,
-#        an ISBN, an author, and a genre
-#        """
-        
-
+    def testInit(self):
+        """
+        Passing incorrect types should result in type errors
+        """
+        with self.assertRaises(TypeError):
+            Book(title=50, isbn="0000111125433",
+                           author="Book Writer", genre="Educational",)
+            Book(title="Book Tests", isbn=50,
+                           author="Book Writer", genre="Educational",)
+            Book(title="Book Tests", isbn="0000111125433",
+                           author=100, genre="Educational",)
+            Book(title="Book Tests", isbn="0000111125433",
+                           author="Book Writer", genre=("Educational",),)
     def testTitle(self):
         def set_title(title):
             self._book.title    = title
