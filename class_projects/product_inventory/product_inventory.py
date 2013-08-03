@@ -47,7 +47,7 @@ class Product(Entity):
         self._value = val
     
     def __repr__(self):
-        return "{0}: {1}".format(self.__class__, self._id)
+        return "{0}: {1}".format(self.__class__.__name__, self._id)
     
 class Inventory(Entity):
     
@@ -110,7 +110,7 @@ class Inventory(Entity):
         return self._id
     
     def __repr__(self):
-        return "{0}: {1}".format(self.__class__, self._id)
+        return "{0}: {1}".format(self.__class__.__name__, self._id)
     
 class ObjFactory(metaclass=ABCMeta):
     
@@ -119,7 +119,7 @@ class ObjFactory(metaclass=ABCMeta):
         return 0
     
     def __repr__(self):
-        return "{0}: {1}".format(self.__class__, self._id)
+        return "{0}: {1}".format(self.__class__.__name__, self._id)
     
 class InventoryFactory(ObjFactory):
     
@@ -152,4 +152,4 @@ if __name__ == "__main__":
     prod_val    = inventory.product_value
     prod_diff   = inventory.product_diff_amount
     for name, info in (("amount of product",prod_amt), ("value of product",prod_val), ("different products",prod_diff)):
-        print({"{0}: {1}".format(name,info)})
+        print("{0}: {1}".format(name,info))
