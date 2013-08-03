@@ -89,6 +89,21 @@ class TestBook(unittest.TestCase):
         self.assertEqual("Educational",self._book.genre)
         with self.assertRaises(AttributeError):
             set_genre('fail')
+            
+    def testCheckedOut(self):
+        """
+        A book cshould have a property stating whether
+        or not the book is checked out. This property
+        should be setable. This property should always be a 
+        boolean
+        """
+        # It's presumed a book that has just been added to the 
+        # library will not be checked out
+        self.assertFalse(self._book.checked_out,"Book should not yet be checked out")
+        self._book.checked_out      = True
+        self.assertTrue(self._book.checked_out)
+        with self.assertRaises(TypeError):
+            self._book.checked_out  = "True"
         
 class TestLibrary(unittest.TestCase):        
     """
@@ -107,6 +122,16 @@ class TestLibrary(unittest.TestCase):
                    Book("book_six",gen_isbn(13),"author_six","genre_six"),
                    Book("book_seven",gen_isbn(13),"author_seven","genre_seven"),
                    ]
+    
+    def testBooks(self):
+        """
+        Should return all books library has on hand.
+        A library should start with no books on hand
+        books should not be setable
+        """
+        self.assertIsNone(self._library.books)
+        with self.assertRaises(AttributeError):
+            self._library.books     = self.__books
     
     def testAddBooks(self):
         """
