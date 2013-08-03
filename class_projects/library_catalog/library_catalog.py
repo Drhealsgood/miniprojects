@@ -75,7 +75,7 @@ class Book(object):
         self._author        = author
         self._genre         = genre
         self._checked_out   = (False,)
-        self._checked_out_to= False
+        self._checked_out_to= None
         
     @property
     def title(self):
