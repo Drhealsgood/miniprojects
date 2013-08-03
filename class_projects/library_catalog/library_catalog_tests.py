@@ -160,6 +160,10 @@ class TestLibrary(unittest.TestCase):
         self.assertTrue(res)
         # library's books should be same len as books added now
         self.assertEqual(self._library.books_all,self.__books)
+        # add extra books via unpacking
+        b1      = Book("book_eight",TestLibrary.gen_isbn(13),"author_eight","genre_eight"),
+        b2      = Book("book_nine",TestLibrary.gen_isbn(13),"author_nine","genre_nine")
+        self._library.add_books(b1,b2)
             
     def testCheckOut(self):
         """
