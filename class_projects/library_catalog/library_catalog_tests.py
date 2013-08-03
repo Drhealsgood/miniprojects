@@ -108,12 +108,17 @@ class TestBook(unittest.TestCase):
         """
         # It's presumed a book that has just been added to the 
         # library will not be checked out
-        self._book.checked_out      = ('tuple',)
         self.assertFalse(self._book.checked_out,"Book should not yet be checked out")
         self._book.checked_out      = True
         self.assertTrue(self._book.checked_out)
         with self.assertRaises(TypeError):
             self._book.checked_out  = "True"
+            
+    def testCheckedOutTo(self):
+        """
+        A book should always be checked out to a customer
+        """
+        pass
         
 class TestLibrary(unittest.TestCase):        
     """
@@ -142,7 +147,7 @@ class TestLibrary(unittest.TestCase):
         self.assertIsNone(self._library.books)
         with self.assertRaises(AttributeError):
             self._library.books     = self.__books
-    
+            
     def testAddBooks(self):
         """
         should be able to add books to library catalog. Should only accept
@@ -150,6 +155,30 @@ class TestLibrary(unittest.TestCase):
         """
         self.assertRaises(TypeError,self._library.add_books("NOT A BOOK LOLOLOLOL"))
         self.assertTrue(self._library.add_books(book for book in self.__books))
+            
+    def testCheckOut(self):
+        """
+        checkOut ensures book is not currently out and exists in library catalog;
+        checkout then checks the book out to 
+        """
+        pass
+    
+    def testBooksOut(self):
+        """
+        Library should either keep track or be able to return all
+        books currently out
+        """
+        # a Library with no books should return False
+        self.assertFalse(self._library.books_out)
+        # add books
+    
+    def testBooksIn(self):
+        """
+        Library should be able to return all books currently IN
+        """
+        pass
+    
+   
         
                 
     

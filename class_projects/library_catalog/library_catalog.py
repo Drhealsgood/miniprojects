@@ -5,8 +5,22 @@ Created on 3/08/2013
 '''
 
 class Library(object):
-    pass
+    
 
+    def __init__(self):
+        self._books = None
+        
+    @property
+    def books_all(self):
+        return self._books
+    
+    @property
+    def books_out(self):
+        if self._books: 
+            return [book for book in self._books if book.checked_out]
+        return False
+
+    
 class Book(object):
     
     def __init__(self,title,isbn,author,genre):
