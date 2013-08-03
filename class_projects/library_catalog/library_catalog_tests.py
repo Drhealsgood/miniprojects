@@ -215,6 +215,8 @@ class TestLibrary(unittest.TestCase):
         self.assertIn(book,self._library.books_in)
         self.assertIsNone(book.checked_out_to)
         self.assertFalse(book.checked_out[0])
+        # book was checked in today
+        self.assertEqual(book.checked_out[1],date.today())
         
     def testBooksOut(self):
         # a Library with no books should return False

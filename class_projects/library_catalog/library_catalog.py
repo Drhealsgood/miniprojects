@@ -50,6 +50,17 @@ class Library(object):
         # set book status to out; date done in checked_out method of Book
         book.checked_out = True
         book.checked_out_to = customer
+    
+    def checkin(self,book):
+        """
+        return the book
+        """
+        if book not in self._books:
+            raise ValueError("book not part of library")
+        if book not in self.books_out:
+            raise ValueError("book is not currently out")
+        book.checked_out    = False
+        book.checked_out_to = None
 
 class Book(object):
     
