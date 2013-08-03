@@ -45,10 +45,13 @@ class TestBook(unittest.TestCase):
         self.assertNotEqual(self._class_vars[title],'','Expected legitimate title')
         # test if setting title fails
         self.assertRaises(AttributeError,set_title('should_fail'))
+        self.assertEqual("Book Tests",self._book.title)
         
     def testISBN(self):
         def set_isbn(num):
             self._book.isbn     = num
+        def bad_impl():
+            Book("title","123456789","author","genre")
         """
         An ISBN number is 13 numbers long
         A book should have an ISBN when created
@@ -62,7 +65,8 @@ class TestBook(unittest.TestCase):
         print(self._class_vars[isbn])
         self.assertEqual(len(self._class_vars[isbn]),13)
         # ISBN should be 13 chars long
-        self.assertRaises(AttributeError,Book("title","123456789","author","genre"))
+        self.assertRaises(AttributeError,bad_impl)
+        self.assertEqual("0000111125433",self._book.isbn)
         
     def testAuthor(self):
         def set_author(author):
@@ -75,6 +79,10 @@ class TestBook(unittest.TestCase):
         self.assertIn(author,self._class_vars)
         self.assertNotEqual(self._class_vars[author],'')
         self.assertRaises(AttributeError,set_author('fail'))
+        self.assertEqual("Book Writer",self._book.author)
+        
+    def testGenre(self):
+        self.assertEqual("Educational",self._book.genre)
         
 class TestLibrary(unittest.TestCase):        
     """
