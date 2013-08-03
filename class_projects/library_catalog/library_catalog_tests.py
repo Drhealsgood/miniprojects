@@ -189,6 +189,32 @@ class TestLibrary(unittest.TestCase):
         # when a book is checked out it should be removed from books_in
         self.assertEqual(len(self._library.books_in),len(self._library.books_all)-1)
         self.assertNotIn(book,self._library.books_in)
+    
+    def testCheckIn(self):
+        """
+        testCheckIn tests the returning of a book.
+        check_in should ensure book is not in, ensure that it is in books_all,
+        finally it should return book in by removing its checkedout status
+        and reutrning it to books_in
+        """
+        # a book must first be checked out
+        self._library.add_books(book for book in self.__books)
+        book    = self._library.books_all[0]
+        book_in = self._library.books_all[1]
+        self._library.checkout(book,"Garry")
+        self.assertIn(book,self._library.books_out)
+        # try t0 return a book that is already in
+        self.assertIn(book_in,self._library.books_in)
+        with self.assertRaises(ValueError):
+            self._library.checkin(book_in)
+            # try to return a book that is not in books_all
+            self._library.checkin(Book("book_nine",TestLibrary.gen_isbn(13),"author_nine","genre_nine"))
+        # correctly return a book
+        self._library.checkin(book)
+        self.assertNotIn(book,self._library.books_out)
+        self.assertIn(book,self._library.books_in)
+        self.assertIsNone(book.checked_out_to)
+        self.assertFalse(book.checked_out[0])
         
     def testBooksOut(self):
         # a Library with no books should return False
