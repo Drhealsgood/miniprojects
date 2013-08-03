@@ -19,15 +19,16 @@ class TestBook(unittest.TestCase):
     """
     A book should have a title, an ISBN, an author, a genre
     """
-    
-    def testInit(self):
-        """
-        On creation a book should have a title,
-        an ISBN, an author, and a genre
-        """
-        self._book      = Book(title="Book Tests", isbn="000011112543",
+    _book      = Book(title="Book Tests", isbn="0000111125433",
                            author="Book Writer", genre="Educational",)
-        self._class_vars= vars(self._book)
+    _class_vars= vars(_book)
+    
+#    def testInit(self):
+#        """
+#        On creation a book should have a title,
+#        an ISBN, an author, and a genre
+#        """
+        
 
     def testTitle(self):
         def set_title(title):
@@ -38,7 +39,7 @@ class TestBook(unittest.TestCase):
         as this would imply a new book has been created
         """
         
-        title       = '_Book__title'
+        title       = '_title'
         # ensure book has a title
         self.assertIn(title,self._class_vars)
         self.assertNotEqual(self._class_vars[title],'','Expected legitimate title')
@@ -53,11 +54,12 @@ class TestBook(unittest.TestCase):
         A book should have an ISBN when created
         the ISBN of a book should not be able to change
         """
-        isbn        = '_Book__isbn'
-        isbn_num    = "000011112543"
+        isbn        = '_isbn'
+        isbn_num    = "0000111125433"
         self.assertIn(isbn,self._class_vars)
         self.assertEqual(self._class_vars[isbn],isbn_num)
         self.assertRaises(AttributeError,set_isbn('someNumber'))
+        print(self._class_vars[isbn])
         self.assertEqual(len(self._class_vars[isbn]),13)
         # ISBN should be 13 chars long
         self.assertRaises(AttributeError,Book("title","123456789","author","genre"))
@@ -69,7 +71,7 @@ class TestBook(unittest.TestCase):
         A book should have an author upon creation
         the author of a book should not be able to change
         """
-        author      = '_Book__author'
+        author      = '_author'
         self.assertIn(author,self._class_vars)
         self.assertNotEqual(self._class_vars[author],'')
         self.assertRaises(AttributeError,set_author('fail'))

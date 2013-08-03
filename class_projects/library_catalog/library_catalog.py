@@ -8,7 +8,13 @@ class Library(object):
     pass
 
 class Book(object):
-    pass
-
+    
+    def __init__(self,title,isbn,author,genre):
+        self._title     = title
+        self._isbn      = isbn
+        self._author    = author
+        self._genre     = genre
+        
+        
 if __name__ == '__main__':
     pass
