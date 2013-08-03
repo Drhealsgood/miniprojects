@@ -13,6 +13,7 @@ IDoes the ISBN-13 have any meaning imbedded in the numbers?
 '''
 import random
 import unittest
+from datetime import date
 from library_catalog import Book, Library
 
 class TestBook(unittest.TestCase):
@@ -168,9 +169,19 @@ class TestLibrary(unittest.TestCase):
     def testCheckOut(self):
         """
         checkOut ensures book is not currently out and exists in library catalog;
-        checkout then checks the book out to 
+        checkout then checks the book out to a customer
         """
-        pass
+        # add default books to library
+        self._library.add_books(book for book in self.__books) 
+        book    = self._library.books_all[0]
+        # checkout time = today
+        today = date.today()
+        self._library.checkout(book,"Garry")
+        # bOOK SHOULD now be in books_out
+        self.assertIn(book,self._library.books_out)
+        # booksout[book] should link to person who got book out and what date
+        self.assertEqual(self._library.books_out[book],("Garry",today))
+        
     
     def testBooksOut(self):
         """
