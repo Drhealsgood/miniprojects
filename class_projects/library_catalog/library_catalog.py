@@ -7,7 +7,7 @@ Created on 3/08/2013
 class Library(object):
 
     def __init__(self):
-        self._books = None
+        self._books = []
         
     @property
     def books_all(self):
@@ -23,11 +23,25 @@ class Library(object):
     def books_in(self):
         pass
     
+    def _clear_data(self):
+        """
+        Reverts all dat ato expected data upon creation
+        """
+        self._books     = []
+    
     def add_books(self,*args):
-        try: 
-            [self._books.append(arg) for arg in args if isinstance(Book,type(arg))]
-            return True
-        except: return False
+        def add_book(book):
+            if isinstance(book,Book):
+                self._books.append(book)
+                
+        for arg in args:
+            # in case arg is iter of books
+            if hasattr(arg,'__iter__'):
+                for val in arg:
+                    add_book(val)
+            else: # presumably it's a book
+                add_book(arg)
+        return True
 
     
 class Book(object):

@@ -138,22 +138,28 @@ class TestLibrary(unittest.TestCase):
                    Book("book_seven",gen_isbn(13),"author_seven","genre_seven"),
                    ]
     
-    def testBooks(self):
+    def setUp(self):
+        self._library._clear_data()
+    
+    def testBooksAll(self):
         """
         Should return all books library has on hand.
         A library should start with no books on hand
         books should not be setable
         """
-        self.assertIsNone(self._library.books)
+        self.assertEqual(self._library.books_all,[])
         with self.assertRaises(AttributeError):
-            self._library.books     = self.__books
+            self._library.books_all = self.__books
             
     def testAddBooks(self):
         """
         should be able to add books to library catalog. Should only accept
         books, anything else should be ignored; should return True to indicate success
         """
-        self.assertTrue(self._library.add_books(book for book in self.__books))
+        res     = self._library.add_books(book for book in self.__books)
+        self.assertTrue(res)
+        # library's books should be same len as books added now
+        self.assertEqual(self._library.books_all,self.__books)
             
     def testCheckOut(self):
         """
