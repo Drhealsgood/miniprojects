@@ -5,7 +5,6 @@ Created on 3/08/2013
 '''
 
 class Library(object):
-    
 
     def __init__(self):
         self._books = None
@@ -19,6 +18,16 @@ class Library(object):
         if self._books: 
             return [book for book in self._books if book.checked_out]
         return False
+    
+    @property
+    def books_in(self):
+        pass
+    
+    def add_books(self,*args):
+        try: 
+            [self._books.append(arg) for arg in args if isinstance(Book,type(arg))]
+            return True
+        except: return False
 
     
 class Book(object):

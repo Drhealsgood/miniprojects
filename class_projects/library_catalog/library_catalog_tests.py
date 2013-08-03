@@ -151,9 +151,8 @@ class TestLibrary(unittest.TestCase):
     def testAddBooks(self):
         """
         should be able to add books to library catalog. Should only accept
-        books; should return True to indicate success
+        books, anything else should be ignored; should return True to indicate success
         """
-        self.assertRaises(TypeError,self._library.add_books("NOT A BOOK LOLOLOLOL"))
         self.assertTrue(self._library.add_books(book for book in self.__books))
             
     def testCheckOut(self):
