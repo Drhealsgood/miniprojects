@@ -17,6 +17,22 @@ class Book(object):
         self._author    = author
         self._genre     = genre
         
+    @property
+    def title(self):
+        return self._title
+    
+    @property
+    def isbn(self):
+        return self._isbn
+    
+    @property
+    def author(self):
+        return self._author
+    
+    @property
+    def genre(self):
+        return self._genre
+        
         
 if __name__ == '__main__':
     pass

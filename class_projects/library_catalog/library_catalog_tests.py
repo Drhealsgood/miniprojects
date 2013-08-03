@@ -44,7 +44,8 @@ class TestBook(unittest.TestCase):
         self.assertIn(title,self._class_vars)
         self.assertNotEqual(self._class_vars[title],'','Expected legitimate title')
         # test if setting title fails
-        self.assertRaises(AttributeError,set_title('should_fail'))
+        with self.assertRaises(AttributeError):
+            set_title('should_fail')
         self.assertEqual("Book Tests",self._book.title)
         
     def testISBN(self):
@@ -61,11 +62,11 @@ class TestBook(unittest.TestCase):
         isbn_num    = "0000111125433"
         self.assertIn(isbn,self._class_vars)
         self.assertEqual(self._class_vars[isbn],isbn_num)
-        self.assertRaises(AttributeError,set_isbn('someNumber'))
-        print(self._class_vars[isbn])
         self.assertEqual(len(self._class_vars[isbn]),13)
         # ISBN should be 13 chars long
-        self.assertRaises(AttributeError,bad_impl)
+        with self.assertRaises(AttributeError):
+            bad_impl()
+            set_isbn('someNumber')
         self.assertEqual("0000111125433",self._book.isbn)
         
     def testAuthor(self):
@@ -78,11 +79,16 @@ class TestBook(unittest.TestCase):
         author      = '_author'
         self.assertIn(author,self._class_vars)
         self.assertNotEqual(self._class_vars[author],'')
-        self.assertRaises(AttributeError,set_author('fail'))
+        with self.assertRaises(AttributeError):
+            set_author('fail')
         self.assertEqual("Book Writer",self._book.author)
         
     def testGenre(self):
+        def set_genre(x):
+            self._book.genre = x
         self.assertEqual("Educational",self._book.genre)
+        with self.assertRaises(AttributeError):
+            set_genre('fail')
         
 class TestLibrary(unittest.TestCase):        
     """
