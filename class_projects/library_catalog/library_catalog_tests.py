@@ -206,12 +206,6 @@ class TestLibrary(unittest.TestCase):
         self.assertEqual(self._library.books_all,self._library.books_in)
         # other testing logic taken care of in testCheckOut
     
-   
-        
-                
-    
-    
-        
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

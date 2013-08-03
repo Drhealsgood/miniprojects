@@ -16,13 +16,11 @@ class Library(object):
     
     @property
     def books_out(self):
-        if self._books: 
-            return {book:(book.checked_out_to,book.checked_out[1]) for book in self._books if book.checked_out[0]}
-        return False
+        return {book:(book.checked_out_to,book.checked_out[1]) for book in self._books if book.checked_out[0]} if len(self._books)>0 else False
     
     @property
     def books_in(self):
-        pass
+        return [book for book in self._books if not book.checked_out[0]] if len(self._books)>0 else False
     
     def _clear_data(self):
         """
@@ -49,12 +47,10 @@ class Library(object):
         return True
     
     def checkout(self,book,customer):
-        # set book status to out
+        # set book status to out; date done in checked_out method of Book
         book.checked_out = True
         book.checked_out_to = customer
-        # 
 
-    
 class Book(object):
     
     def __init__(self,title,isbn,author,genre):
