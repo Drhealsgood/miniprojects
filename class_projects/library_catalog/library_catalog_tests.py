@@ -108,6 +108,7 @@ class TestBook(unittest.TestCase):
         """
         # It's presumed a book that has just been added to the 
         # library will not be checked out
+        self._book.checked_out      = ('tuple',)
         self.assertFalse(self._book.checked_out,"Book should not yet be checked out")
         self._book.checked_out      = True
         self.assertTrue(self._book.checked_out)
