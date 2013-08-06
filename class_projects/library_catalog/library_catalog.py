@@ -3,7 +3,8 @@ Created on 3/08/2013
 
 @author: luke
 '''
-from datetime import date
+from datetime import date, timedelta
+from abc import *
 
 class Library(object):
 
@@ -47,9 +48,16 @@ class Library(object):
         return True
     
     def checkout(self,book,customer):
+        if book.checked_out[0]:
+            print("book is currently checked out to {0}".format(book.checked_out_to))
+            return 0
         # set book status to out; date done in checked_out method of Book
-        book.checked_out = True
-        book.checked_out_to = customer
+        book.checked_out        = True
+        book.checked_out_to     = customer
+        # set overdue date
+        book.checked_out_date   = date.today()
+        return 1
+        
     
     def checkin(self,book):
         """
@@ -59,9 +67,11 @@ class Library(object):
             raise ValueError("book not part of library")
         if book not in self.books_out:
             raise ValueError("book is not currently out")
-        book.checked_out    = False
-        book.checked_out_to = None
-
+        book.checked_out        = False
+        book.checked_out_to     = None
+        book.checked_in_date    = date.today()
+        book.checked_out_date   = None
+        
 class Book(object):
     
     def __init__(self,title,isbn,author,genre):
@@ -71,11 +81,13 @@ class Book(object):
         self._title     = title
         if len(isbn)!= 13:
             raise AttributeError
-        self._isbn          = isbn
-        self._author        = author
-        self._genre         = genre
-        self._checked_out   = (False,)
-        self._checked_out_to= None
+        self._isbn              = isbn
+        self._author            = author
+        self._genre             = genre
+        self._checked_out       = (False,)
+        self._checked_out_to    = None
+        self.checked_in_date    = date.today()
+        self.checked_out_date   = None
         
     @property
     def title(self):
@@ -102,6 +114,7 @@ class Book(object):
         if not isinstance(res,bool):
             raise TypeError("Expected boolean but recieved {0}".format(type(res)))
         self._checked_out   = (res,date.today())
+        return 1
     
     @property
     def checked_out_to(self):
@@ -111,6 +124,33 @@ class Book(object):
     def checked_out_to(self,person):
         self._checked_out_to = person
         
+    @property
+    def overdue(self):
+        return (date.today()==date.today()+timedelta(days=14))
+    
+    def __repr__(self):
+        return ("{0}({title}-{author}-{genre}-{isbn})".format(
+                self.__class__.__name__,title=self._title,
+                author=self._author,genre=self._genre,isbn=self._isbn
+                                                              ))
+    
+class ObjFactory(metaclass=ABCMeta):
+    
+    @abstractmethod
+    def get_object(self):
+        return 0
+    
+    def __repr__(self):
+        return "{0}-{1}".format(self.__class__.__name__, self._id)
         
+class BookFactory(ObjFactory):
+    
+    def get_object(self, args):
+        for (title,isbn,author,genre) in args:
+            yield Book(title,isbn,author,genre)
+            
+        
+                  
+    
 if __name__ == '__main__':
     pass

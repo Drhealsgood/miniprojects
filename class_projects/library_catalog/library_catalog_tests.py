@@ -13,8 +13,10 @@ IDoes the ISBN-13 have any meaning imbedded in the numbers?
 '''
 import random
 import unittest
+from datetime import datetime
 from datetime import date, timedelta
 from library_catalog import Book, Library
+from mock import Mock
 
 class TestBook(unittest.TestCase):
     """
@@ -133,8 +135,15 @@ class TestBook(unittest.TestCase):
     def testOverDue(self):
         """
         A book becomes overdue after '2 weeks?'
+        I don't know how to test this.
         """
-        pass
+        lib     = Library()
+        lib.add_books(self._book)
+        
+        real    = Book("book_seven",'0000111125433',"author_seven","genre_seven")
+        real.method = Mock(return_value=datetime().today()+datetime.timedelta(days=14))
+        print(real.method(1234,"hey You!"))
+        
         
 class TestLibrary(unittest.TestCase):        
     """
@@ -186,6 +195,8 @@ class TestLibrary(unittest.TestCase):
         testCheckout also tests books_out
         checkOut ensures book is not currently out and exists in library catalog;
         checkout then checks the book out to a customer
+        Checkout should also add a date that the book was checked out to the book's
+        properties to signal when it is over due.
         """
         
         # add default books to library
