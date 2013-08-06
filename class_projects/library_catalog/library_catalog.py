@@ -125,8 +125,12 @@ class Book(object):
         self._checked_out_to = person
         
     @property
+    def due_back(self):
+        return self._checked_out[1]+timedelta(days=14) if self._checked_out[0] else False
+        
+    @property
     def overdue(self):
-        return (date.today()==date.today()+timedelta(days=14))
+        return (date.today()==self._due_back)
     
     def __repr__(self):
         return ("{0}({title}-{author}-{genre}-{isbn})".format(

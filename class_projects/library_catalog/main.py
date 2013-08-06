@@ -36,6 +36,8 @@ if __name__ == '__main__':
     print(books[0].checked_out_to)
     for book in books[1:]:
         library.checkout(book,customers[2])
+    # Book checked out - when book checked out - who to - when due back
+    print(list((book.checked_out,book.checked_out_to,book.due_back) for book in books))
     
     
     
