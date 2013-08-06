@@ -150,7 +150,9 @@ Classes
 
 **Bank Account Manager** \- Create a class called “Account” which will be an abstract class for three other classes called “CheckingAccount”, “SavingsAccount” and “BusinessAccount”. Manage credits and debits from these accounts through an ATM style program.
 
-**Library Catalog** – Create a book class with a title, page count, ISBN and whether or not it is checked out or not. Manage a collection of various books and allow the user to check out books or return books. For added complexity generate a report of those books overdue and any fees. Also allow users to put books on reserve.
+[**Library Catalog**](https://github.com/Drhealsgood/miniprojects/blob/master/class_projects/library_catalog/main.py) – Create a book class with a title, page count, ISBN and whether or not it is checked out or not. Manage a collection of various books and allow the user to check out books or return books. For added complexity generate a report of those books overdue 
+# TODO:  and any fees. Also allow users to put books on reserve.
+
 
 **Patient / Doctor Scheduler** – Create a patient class and a doctor class. Have a doctor that can handle multiple patients and setup a scheduling program where a doctor can only handle 16 patients during an 8 hr work day.
 
