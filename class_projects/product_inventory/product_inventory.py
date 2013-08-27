@@ -18,7 +18,7 @@ class Product(Entity):
     id      = 0
 
 
-    def __init__(self, name=None, value=0):
+    def __init__(self, name=None, value=0, amount=0, scale='kg'):
         '''
         Constructor
         '''
@@ -29,6 +29,8 @@ class Product(Entity):
         else:
             self._name = name
         self._value = value
+        self._amount = amount 
+        self._scale = scale
     
     @property
     def id_number(self):
@@ -45,9 +47,31 @@ class Product(Entity):
     @value.setter
     def value(self, val):
         self._value = val
+        
+    @property
+    def amount(self):
+        return self._amount
     
+    @amount.setter
+    def amount(self,other):
+        self._amount = other
+        
+    @property
+    def scale(self):
+        return self._scale
+    
+    @scale.setter
+    def scale(self, other):
+        self._scale = other
+        
     def __repr__(self):
         return "{0}: {1}".format(self.__class__.__name__, self._id)
+    
+    def __str__(self):
+        return "{amount}{scale} of {name} valued at {value}".format(
+                amount=self._amount,scale=self._scale,name=self._name,
+                value=self._value
+                                                                    )
     
 class Inventory(Entity):
     
@@ -142,14 +166,17 @@ if __name__ == "__main__":
     # create an inventory
     inventory   = Inventory()
     # add some products to the inventory
-    genProd = lambda name, value: Product(name=name,value=value)
-    for i in range(10):
-        inventory.product_add(genProd(name=str(i),value=i))
-    for i in range(5):
-        inventory.product_add(genProd(name=str(i),value=i))
+    genProd = lambda value: Product(value=value)
+    for i in range(1,10):
+        inventory.product_add(genProd(value=i))
+    for i in range(1,5):
+        inventory.product_add(genProd(value=i))
     # Get amount of product on hand, value of product, and amt of differnet product
     prod_amt    = inventory.product_count
     prod_val    = inventory.product_value
     prod_diff   = inventory.product_diff_amount
     for name, info in (("amount of product",prod_amt), ("value of product",prod_val), ("different products",prod_diff)):
         print("{0}: {1}".format(name,info))
+    print(inventory.products)
+    for product in inventory.products:
+        print(product + " prob details: " + str(inventory.products[product]))

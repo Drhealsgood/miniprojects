@@ -71,7 +71,9 @@ class LinkedList(object):
             node.next = ref_node.next.next
         ref_node.next = node
         return True
-        
+    
+    def delete(self, node):
+        node.next = node.next.next
             
     
 #new = Node(data=data,next=pos.next)

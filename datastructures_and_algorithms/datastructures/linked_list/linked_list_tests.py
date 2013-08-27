@@ -68,11 +68,14 @@ class TestLinkedList(unittest.TestCase):
         
     def testDelete(self):
         """
-        The list deletes the node after the node referenced by pos
+        The list deletes the node after the node referenced by node
         """
         self._populate_list()
-        self._ll.delete(5)
-        self.assertNotIn(6,[node.data for node in self._ll])
+        self._ll.delete(self._ll.first.next)
+        temp = self._ll.first
+        while temp.next != None:
+            self.assertNotEqual(temp.data,2)
+            temp = temp.next
         
         
 if __name__ == "__main__":
