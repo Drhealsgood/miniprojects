@@ -36,8 +36,11 @@ class TestLinkedList(unittest.TestCase):
         del(self._ll)
     
     def testFirst(self):
+        self.assertIsNone(self._ll.first)
         self._ll.first = Node("data",next=None)
         self.assertEqual(self._ll.first,Node("data",next=None))
+        self._ll.insert(Node("First!"),pos=0)
+        self.assertEqual(self._ll.first,Node("First!",next=Node("data",next=None)))
 
     def testInsert(self):
         for i in range(10):
