@@ -4,7 +4,7 @@ Created on 27/08/2013
 @author: luke
 '''
 import unittest
-from linked_list import Node
+from linked_list import Node, LinkedList
 
 
 class TestNode(unittest.TestCase):
@@ -13,15 +13,6 @@ class TestNode(unittest.TestCase):
     to represent the data it holds and a next field that references the next: get and setable
     node in the list. 
     """
-
-    def setUp(self):
-        pass
-
-
-    def tearDown(self):
-        pass
-
-
     def testData(self):
         node = Node(data="data",next=None)
         self.assertEqual(node.data,"data")
@@ -35,8 +26,28 @@ class TestNode(unittest.TestCase):
         third = Node(data="third",next=None)
         node.next = third
         self.assertEqual(node.next,third)
+        
+class TestLinkedList(unittest.TestCase):
+    
+    def setUp(self):
+        self._ll = LinkedList()
+        
+    def tearDown(self):
+        del(self._ll)
+    
+    def testFirst(self):
+        self._ll.first = Node("data",next=None)
+        self.assertEqual(self._ll.first,Node("data",next=None))
 
-
+    def testInsert(self):
+        for i in range(10):
+            self._ll.insert(Node(data=i,pos=i))
+        for i,node in enumerate(self._ll):
+            self.assertEqual(node.data,i)
+        self._ll.insert(Node("data"),pos=1)
+        self.assertEqual(Node("data"),self._ll.first.next)
+        self.assertEqual(Node(2),self._ll.first.next.next)
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
