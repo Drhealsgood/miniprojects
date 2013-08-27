@@ -104,6 +104,10 @@ class HTMLRenderer(Handler):
     # substitutions
     def sub_strong(self,match):
         return '<strong>{0}</strong>'.format(match.group(1))
+
+    # Break rules
+    def sub_break(self,match):
+        return '<br />'
     
     def data(self,block):
         return block
@@ -244,6 +248,7 @@ if __name__ == "__main__":
     f       = "../test_resources/markup_text.txt"
     x.add_rule(HeadingRule(),ParagraphRule())
     x.add_filter(r"\*(.+|.?)\*", 'strong')
+    x.add_filter(r"*  \n",'break',)
     t       = x.parse(f)
     Utils.output(t)
     
