@@ -29,6 +29,10 @@ class TestNode(unittest.TestCase):
         
 class TestLinkedList(unittest.TestCase):
     
+    def _populate_list(self):
+        for i in range(10):
+            self._ll.insert(Node(i))
+    
     def setUp(self):
         self._ll = LinkedList()
         
@@ -36,20 +40,40 @@ class TestLinkedList(unittest.TestCase):
         del(self._ll)
     
     def testFirst(self):
+        """
+        First returns the first item in the Linked list.
+        """
         self.assertIsNone(self._ll.first)
-        self._ll.first = Node("data",next=None)
+        self._ll.insert(Node("data"))
         self.assertEqual(self._ll.first,Node("data",next=None))
-        self._ll.insert(Node("First!"),pos=0)
-        self.assertEqual(self._ll.first,Node("First!",next=Node("data",next=None)))
+        self._ll.insert(Node("First!"),ref_node=self._ll.first)
+        self.assertEqual(self._ll.first,Node("data",next=Node("First",next=None)))
 
     def testInsert(self):
+        """
+        The list inserts the given node and the given position
+        if position is not given it inserts at the end of the list
+        """
         for i in range(10):
-            self._ll.insert(Node(data=i,pos=i))
-        for i,node in enumerate(self._ll):
-            self.assertEqual(node.data,i)
-        self._ll.insert(Node("data"),pos=1)
+            self._ll.insert(Node(data=i))
+        i = 0
+        temp = self._ll.first
+        while temp.next != None:
+            self.assertEqual(temp.data,i)
+            temp = temp.next
+            i += 1
+        self._ll.insert(Node("data"),ref_node=self._ll.first)
         self.assertEqual(Node("data"),self._ll.first.next)
         self.assertEqual(Node(2),self._ll.first.next.next)
+        
+    def testDelete(self):
+        """
+        The list deletes the node after the node referenced by pos
+        """
+        self._populate_list()
+        self._ll.delete(5)
+        self.assertNotIn(6,[node.data for node in self._ll])
+        
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
