@@ -74,10 +74,21 @@ class LinkedList(object):
     
     def delete(self, node):
         node.next = node.next.next
+        
+    def walk_through(self):
+        temp = self._first
+        yield temp
+        while temp.next != None:
+            yield temp.next
+            temp = temp.next
             
     
 #new = Node(data=data,next=pos.next)
 #        pos.next = new
 
 if __name__ == '__main__':
-    pass
+    ll = LinkedList()
+    nodes = [Node(data=bin(i)) for i in range(15)]
+    for node in nodes:
+        ll.insert(node)
+    print(list(ll.walk_through()))
