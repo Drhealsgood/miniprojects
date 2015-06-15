@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 public interface IEntry<K, V>
 {
     /**

@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 public class Entry<K, V> implements IEntry<K,V>, Serializable
 {
     private K _key;

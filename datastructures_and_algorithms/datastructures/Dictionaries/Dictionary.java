@@ -38,6 +38,11 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 	return result;
     }
 
+    public V add(K key, V value)
+    {
+	return value;
+    }
+
     public boolean contains(K key)
     {
 	int index = this.getHashKey(key);
@@ -107,7 +112,7 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 		   else
 		       {
 			   // probe to next location
-			   index = this._linearProbe(index) % this._table.length;
+			   index = this.linearProbe(index) % this._table.length;
 		       }
 	       }
 	       // either key is found or null is found at index location
@@ -149,6 +154,11 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 	return null;
     }
 
+    public int getSize()
+    {
+	return this._numberOfEntries;
+    }
+
     public void clear()
     {
 	for (int i=0; i<this._table.length; i++)
@@ -156,6 +166,11 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 		this.setToRemoved(i);
 	    }
 	this._numberOfEntries = 0;
+    }
+
+    public int linearProbe(int index)
+    {
+	return index++;
     }
 
 }

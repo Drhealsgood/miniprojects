@@ -23,7 +23,7 @@ public interface IDictionary<K, V>
      * @param key     key that will be searched for for retrieval of associated value
      * @return value associated with the key.
      */
-    public V getValue(k key);
+    public V getValue(K key);
 
     /**
      * Check whether a specific entry is in the dictionary.
