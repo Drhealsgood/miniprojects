@@ -1,4 +1,4 @@
-public Interface IEntry<K, V>
+public interface IEntry<K, V>
 {
     /**
      * retrieve the key field of this object

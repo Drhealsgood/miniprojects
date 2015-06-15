@@ -1,13 +1,13 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.io.serializable;
+import java.io.Serializable;
 
 public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 {
     private Entry<K, V>[] _table; // entries
     private int _numberOfEntries;
     private static final int DEFAULT_SIZE = 1001; // prime for table size always
-    private static final int MAX_LOAD_FACTOR = 0.5; // how full before we expand table
+    private static final double MAX_LOAD_FACTOR = 0.5; // how full before we expand table
 
     public Dictionary()
 	{
@@ -19,7 +19,7 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 	    // table size must be a prime
 	    int nextPrime = this.getNextPrime(tableSize);
 	    // construct table and set object variables
-	    this._table = newEntry[nextPrime];
+	    this._table = (Entry<K,V>[])new Object[nextPrime];
 	    this._numberOfEntries = 0;
 	    
 	} // END CONSTRUCTOR
@@ -28,14 +28,32 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
     {
 	V result = null;
 
-	int index = this.getHashIndex(key);
+	int index = this.getHashKey(key);
 	index = this.locate(index, key);
 
 	if (index != -1)
 	    {
-		result = this._table[index];
+		result = this._table[index].getValue();
 	    }
 	return result;
+    }
+
+    public boolean contains(K key)
+    {
+	int index = this.getHashKey(key);
+	index = this.locate(index, key);
+
+	return index >= 0; // -1 if not found
+    }
+
+    public boolean isEmpty()
+    {
+	return this._numberOfEntries == 0;
+    }
+
+    public boolean isFull()
+    {
+	return this._numberOfEntries == this._table.length;
     }
 
     public V remove(K key)
@@ -54,6 +72,20 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 	// return removedValue as null or value being removed
 	return removedValue;
     }
+    
+    /**
+     * Supporter function for removing an entry from the dictionary
+     * @param index     The index to remove from the dictionary
+     */
+    private void setToRemoved(int index)
+    {
+	this._table[index] = null;
+    }
+
+    private int getHashKey(K value)
+    {
+	return 0;
+    }
 
     /** 
      * Suporter function for methods searching for a value in the dictionary.
@@ -66,10 +98,9 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 	boolean found = false;
 	int result = -1; // assume not in table here for tidier code
 	// search until key is found 
-	while (!found && (hashTable[index] != null)
+	while (!found && (this._table[index] != null))
 	       {
-		   if (hashTable[index].isIn() && 
-		       key.equals(hashTable[index].getKey()) )
+		   if (key.equals(this._table[index].getKey()) )
 		       {
 			   found = true;
 		       }
@@ -83,6 +114,48 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 	       if(found)
 		   result = index;
 	       return result;
+    }
+
+    private int getNextPrime(int tableSize)
+    {
+	int a = 0, i, j;
+	for (j = a+1; ; j++) // go until return
+	    {
+		for (i = 2; i < j; i++)
+		    {
+			if (j % i == 0)
+			    break;
+		    }
+		if (i == j)
+		    {
+			return j;
+		    }
+	    }
+    }
+
+    public int getMaxSize()
+    {
+	return this._table.length;
+    }
+
+    public Iterator<K> getKeyIterator()
+    {
+	// TODO (need to make iterator class still)
+	return null;
+    }
+
+    public Iterator<V> getValueIterator()
+    {
+	return null;
+    }
+
+    public void clear()
+    {
+	for (int i=0; i<this._table.length; i++)
+	    {
+		this.setToRemoved(i);
+	    }
+	this._numberOfEntries = 0;
     }
 
 }

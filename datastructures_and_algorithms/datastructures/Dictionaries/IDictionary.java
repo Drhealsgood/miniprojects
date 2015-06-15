@@ -1,4 +1,5 @@
-public Interface IDictionary<K, V>
+import java.util.Iterator;
+public interface IDictionary<K, V>
 {
     /**
      * Adds a new entry to the dictionary.
