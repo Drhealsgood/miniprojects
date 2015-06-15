@@ -38,6 +38,7 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 	return result;
     }
 
+    // should modify, that nest structure is yuck.
     public V add(K key, V value)
     {
 	V result = null;
