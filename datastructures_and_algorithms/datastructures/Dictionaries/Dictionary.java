@@ -40,6 +40,45 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 
     public V add(K key, V value)
     {
+	V result = null;
+	Entry entry = new Entry(key, value);
+	int keyIndex = this.getHashKey((K)entry.getKey());
+
+	if (this._table[keyIndex] == null)
+	    { // case: nothing in spot so insert entry
+		this._table[keyIndex] = entry;
+		this._numberOfEntries++;
+	    }
+	else 
+	    {
+		// case: index in table is taken
+		if (this._table[keyIndex].getKey() == entry.getKey())
+		    { // same value so we should overwrite and set new result value
+			result = this._table[keyIndex].getValue();
+			this._table[keyIndex] = entry;
+		    }
+		else 
+		    {
+			// otherwise probe for result
+			int index = this.locate(keyIndex, key);
+			if (index != -1)
+			    {
+				// found entry
+				result = this._table[index].getValue();
+				this._table[index] = entry;
+			    }
+			else
+			    { // no entry found but original location is taken so need to probe for new location
+				do
+				    {
+					keyIndex = this.linearProbe(keyIndex);
+				    } while(this._table[keyIndex]!=null);
+				// must have an empty spot now
+				this._numberOfEntries++;
+			    }
+			this._table[keyIndex] = entry;
+		    }
+	    }
 	return value;
     }
 
@@ -87,7 +126,7 @@ public class Dictionary<K, V> implements IDictionary<K, V>, Serializable
 	this._table[index] = null;
     }
 
-    private int getHashKey(K value)
+    private int getHashKey(K key)
     {
 	return 0;
     }
